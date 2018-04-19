@@ -1,13 +1,19 @@
 '''
 	This code was written by Igor Malheiros for Operational Research Module - 2018 UFPB
-	
+	https://github.com/igormalheiros/Simplex
 '''
 
 import numpy as np
 
 class Simplex:
-	def __init__(self, OF):
-		self.OF = [-1] + OF
+	def __init__(self, OF, Max):
+		self.OF = [1] + OF
+
+		if Max == 'max' or Max == "Max":
+			self.OF = [i * -1 for i in self.OF]
+		elif Max != 'min' or Max != "Min":
+			print("ERROR!")
+
 		self.rows = []
 		self.cons = []
 		self.numVariables = len(self.OF)-1
@@ -198,38 +204,38 @@ if __name__ == '__main__':
 	z          <= 5
 	x,y,z >= 0
 	"""
-	'''t = Simplex([-3,-5])
+	t = Simplex([3,5], "Max")
 	t.add_constraint([1, 0], 4, "<=")
 	t.add_constraint([0, 2], 12, "<=")
-	t.add_constraint([3, 2], 18, "<=")
-	t.solve()'''
+	t.add_constraint([3, 2], 18, "=")
+	t.solve()
 	
-	'''t = Simplex([-2,-3,-2])
+	'''t = Simplex([2,3,2], "Max")
 	t.add_constraint([2, 1, 1], 4, "<=")
 	t.add_constraint([1, 2, 1], 7, "<=")
 	t.add_constraint([0, 0, 1], 5, "<=")
 	t.solve()'''
 
-	'''t = Simplex([-1,-1, -1])
+	'''t = Simplex([1,1, 1], "Max")
 	t.add_constraint([1, 1, 0], 1, "<=")
 	t.add_constraint([0,-1, 1], 0, "<=")
 	t.solve()'''
 
-	'''t = Simplex([-5,-5,-3])
+	'''t = Simplex([5,5,3], "Max")
 	t.add_constraint([1,3,1],3, "<=")
 	t.add_constraint([-1,0,3],2, "<=")
 	t.add_constraint([2,-1,2],4, "<=")
 	t.add_constraint([2,3,-1],2, "<=")
 	t.solve()'''
 
-	'''t = Simplex([-2,-1])
+	'''t = Simplex([2,1], "Max")
 	t.add_constraint([1, 1], 3, "<=")
 	t.add_constraint([2, 1], 5, "<=")
 	t.add_constraint([0, 1], 1, "=")
 	t.solve()'''
 
-	t = Simplex([0.4, 0.5])
+	'''t = Simplex([0.4, 0.5], "Min")
 	t.add_constraint([0.3, 0.1], 2.7, "<=")
 	t.add_constraint([0.5, 0.5], 6, "=")
 	t.add_constraint([0.6, 0.4], 6, ">=")
-	t.solve()
+	t.solve()'''
